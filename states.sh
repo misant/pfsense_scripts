@@ -4,7 +4,7 @@
  
 reset_voip_states() {
    echo "Reset states"
-   /sbin/pfctl -i vmx0 -k 192.168.254.11
+   /sbin/pfctl -k 192.168.0.0/16
 }
 
 gwStat=`/root/gw.php | grep WAN2 | awk -F'[:]' '{print $5}'`
