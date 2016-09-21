@@ -8,19 +8,21 @@ gwName="WAN2"
 voipNet="192.168.0.0/16"
 ##########################
 
+CURDATE=`date "+%Y%m%d:%H%M"`
+ 
  
 reset_voip_states() {
-   echo "Reset states"
-   /sbin/pfctl -k $voipNet
+   echo "$CURDATE:Reset states"
+   /sbin/pfctl -k $voipNet >> /root/states.log
 }
 
 gwStat=`/root/gw.php | grep $gwName | awk -F'[:]' '{print $5}'`
 
 if [ "$gwStat" == "Online" ]
     then
-        echo "$gwName is ONLINE!"
-        test -f ~/off.lbl && reset_voip_states && rm ~/off.lbl || echo "No mark, everything is ok"
+        echo "$CURDATE:$gwName is ONLINE!"
+        test -f ~/off.lbl && reset_voip_states && rm ~/off.lbl || echo "$CURDATE:No mark, everything is ok"
     else
-        echo "$gwName is OFFLINE!"
+        echo "$CURDATE:$gwName is OFFLINE!"
         touch ~/off.lbl
 fi
