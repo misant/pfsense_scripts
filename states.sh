@@ -28,8 +28,6 @@ reset_voip_states() {
     rm states.list
 }
 
-reset_voip_states
-
 gwStat=`/root/states/gw.php | grep $gwName | awk -F'[:]' '{print $5}'`
 
 if [ "$gwStat" == "Online" ]
