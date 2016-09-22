@@ -19,7 +19,7 @@ reset_voip_states() {
     /bin/echo "$CURDATE:Resetting states"
     /sbin/pfctl -i $nicName -ss -vv | /usr/bin/grep -A 3 $voipNet > states.list
 
-    /usr/bin/grep id /root/states/states.list | while /usr/bin/read -r line; do
+    /usr/bin/grep id /root/states/states.list | while read -r line; do
         stateID=`/bin/echo $line | /usr/bin/awk -F'[ ]' '{print $2}'`
         /bin/echo "$CURDATE:pfctl -i $nicName -k id -k $stateID"
         /sbin/pfctl -i $nicName -k id -k $stateID
@@ -28,7 +28,7 @@ reset_voip_states() {
     /bin/rm states.list
 }
 
-gwStat=`/root/states/gw.php | /bin/grep $gwName | /usr/bin/awk -F'[:]' '{print $5}'`
+gwStat=`/root/states/gw.php | /usr/bin/grep $gwName | /usr/bin/awk -F'[:]' '{print $5}'`
 
 if [ "$gwStat" == "Online" ]
     then
