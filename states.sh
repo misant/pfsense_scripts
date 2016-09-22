@@ -9,7 +9,7 @@
 nicName="bge0"
 # gwName - main Gateway name, its state is monitored
 gwName="Beeline"
-# voipNet - network, for which stated will be killed. If network is 172.16.30.0/24, you need to set it as 172.16.30 (as it used in grep)
+# voipNet - network, for which states will be killed. If network is 172.16.30.0/24, you need to set it as 172.16.30 (as it used in grep)
 voipNet="192.168.185.254"
 ##########################
 
