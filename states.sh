@@ -6,18 +6,18 @@
 ##########################
 # Set variables
 # nicName - backup network interface, states will be killed on that nic after main Gateway was restored
-nicName="bge0"
+nicName="vmx0"
 # gwName - main Gateway name, its state is monitored
-gwName="Beeline"
+gwName="WAN2_DHCP"
 # voipNet - network, for which stated will be killed. If network is 172.16.30.0/24, you need to set it as 172.16.30 (as it used in grep)
-voipNet="192.168.185.254"
+voipNet="192.168.1"
 ##########################
 
 CURDATE=`/bin/date "+%Y%m%d:%H%M"`
 
 reset_voip_states() {
     /bin/echo "$CURDATE:Resetting states"
-    /sbin/pfctl -i $nicName -ss -vv | /usr/bin/grep -A 2 $voipNet > states.list
+    /sbin/pfctl -i $nicName -ss -vv | /usr/bin/grep -A 2 $voipNet > /root/states/states.list
 
     /usr/bin/grep id /root/states/states.list | while read -r line; do
         stateID=`/bin/echo $line | /usr/bin/awk -F'[ ]' '{print $2}'`
@@ -25,7 +25,7 @@ reset_voip_states() {
         /sbin/pfctl -i $nicName -k id -k $stateID
 
     done
-    /bin/rm states.list
+#   /bin/rm states.list
 }
 
 gwStat=`/root/states/gw.php | /usr/bin/grep $gwName | /usr/bin/awk -F'[:]' '{print $5}'`
