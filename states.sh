@@ -17,7 +17,7 @@ CURDATE=`/bin/date "+%Y%m%d:%H%M"`
 
 reset_voip_states() {
     /bin/echo "$CURDATE:Resetting states"
-    /sbin/pfctl -i $nicName -ss -vv | /usr/bin/grep -A 3 $voipNet > states.list
+    /sbin/pfctl -i $nicName -ss -vv | /usr/bin/grep -A 2 $voipNet > states.list
 
     /usr/bin/grep id /root/states/states.list | while read -r line; do
         stateID=`/bin/echo $line | /usr/bin/awk -F'[ ]' '{print $2}'`
