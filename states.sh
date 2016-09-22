@@ -33,8 +33,8 @@ gwStat=`/root/states/gw.php | /usr/bin/grep $gwName | /usr/bin/awk -F'[:]' '{pri
 if [ "$gwStat" == "Online" ]
     then
         /bin/echo "$CURDATE:$gwName is ONLINE!"
-        /bin/test -f ~/states/off.lbl && reset_voip_states && /bin/rm ~/states/off.lbl || /bin/echo "$CURDATE:No mark, everything is ok"
+        /bin/test -f /root/states/off.lbl && reset_voip_states && /bin/rm /root/states/off.lbl || /bin/echo "$CURDATE:No mark, everything is ok"
     else
         /bin/echo "$CURDATE:$gwName is OFFLINE!"
-        /usr/bin/touch ~/states/off.lbl
+        /usr/bin/touch /root/states/off.lbl
 fi
