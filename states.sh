@@ -6,7 +6,7 @@
 ##########################
 # Set variables
 # nicName - backup network interface, states will be killed on that nic after main Gateway was restored
-nicName="vmx0"
+nicName="vmx2"
 # gwName - main Gateway name, its state is monitored
 gwName="WAN2_DHCP"
 # voipNet - network, for which states will be killed. If network is 172.16.30.0/24, you need to set it as 172.16.30 (as it used in grep)
