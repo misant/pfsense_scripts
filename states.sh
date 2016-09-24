@@ -9,7 +9,7 @@
 nicName="vmx0"
 # gwName - main Gateway name, its state is monitored
 gwName="WAN2_DHCP"
-# voipNet - network, for which stated will be killed. If network is 172.16.30.0/24, you need to set it as 172.16.30 (as it used in grep)
+# voipNet - network, for which states will be killed. If network is 172.16.30.0/24, you need to set it as 172.16.30 (as it used in grep)
 voipNet="192.168.1"
 # workdir - directory where all related files will be stored 
 workDir="/root/states"
@@ -27,7 +27,7 @@ reset_id_states() {
         /sbin/pfctl -i $nicName -k id -k $stateID
 
     done
-#   /bin/rm $workDir/states.list
+   /bin/rm $workDir/states.list
 }
 
  reset_source_states() {
@@ -45,7 +45,7 @@ reset_id_states() {
           /sbin/pfctl -i $nicName -k $src -k $dst
       done
      # remove states list
-#      /bin/rm $workDir/states.list
+      /bin/rm $workDir/states.list
   }
 
 gwStat=`$workDir/gw.php | /usr/bin/grep $gwName | /usr/bin/awk -F'[:]' '{print $5}'`
